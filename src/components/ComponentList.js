@@ -7,9 +7,8 @@ import {range, inRange} from 'lodash';
 import {makeStyles} from "@material-ui/core/styles/index";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 
-import Draggable from './Draggble';
+import  Draggable2  from './Draggable2'
 
 
 
@@ -40,14 +39,19 @@ const HEIGHT = 80;
 
 function PaperComponent(props) {
     return (
-      <Draggable             
+/*       <Draggable             
      
       id={props.id}
       onDrag={props.onDrag}
       onDragEnd={props.onDragEnd} >
 
         <Paper key={'paper' + props.id} {...props} > {props.children} </Paper>
-      </Draggable>
+      </Draggable> */
+
+            
+      <Draggable2 key={'paper' + props.id} {...props}> {props.children} </Draggable2>
+           
+   
     );
   }
 
@@ -59,22 +63,28 @@ export default function ComponentList() {
         dragOrder: items, // items order while dragging
         draggedIndex: null
     });
-    const handleDrag = useCallback(({translation, id}) => {
+    /* const handleDrag = useCallback(({translation, id}) => {
         const delta = Math.round(translation.y / HEIGHT);
+        console.log(`translation:${translation.y}`);
+        console.log(`delta:${delta}`);
         const index = state.order.indexOf(id);
+        console.log(`index:${index}`);
         const dragOrder = state.order.filter(index => index !== id);
-            
+        console.log(`index + delta:${index + delta}`);    
+        console.log(`items.length:${items.length}`); 
         if (!inRange(index + delta, 0, items.length)) {
           return;
         }
             
-        dragOrder.splice(index + delta, 0, id);
-            
-        setState(state => ({
-          ...state,
-          draggedIndex: id,
-          dragOrder
-        }));
+        dragOrder.splice(index + delta, 1, id);
+         
+            setState(state => ({
+                ...state,
+                draggedIndex: id,
+                dragOrder
+              })); 
+         
+
       }, [state.order, items.length]);
         
       const handleDragEnd = useCallback(() => {
@@ -83,19 +93,22 @@ export default function ComponentList() {
           order: state.dragOrder,
           draggedIndex: null
         }));
-      }, []);
+      }, []); */
 
     return(
         <React.Fragment>
-            <Grid item xs={4} sm={6} md={4} lg={12}>
+            <Grid direction="column">
              {items.map(index => {
-                       const isDragging = state.draggedIndex === index;
+/*                        const isDragging = state.draggedIndex === index;
                        const top = state.dragOrder.indexOf(index) * (HEIGHT + 10);
-                       const draggedTop = state.order.indexOf(index) * (HEIGHT + 10);
+                       const draggedTop = state.order.indexOf(index) * (HEIGHT + 10); */
                        return(
-                        <PaperComponent className={classes.root}  id={'PaperComponent' + index} onDrag={handleDrag} onDragEnd={handleDragEnd} className={classes.paper}>
+/*                         <PaperComponent className={classes.root}  id={index} onDrag={handleDrag} onDragEnd={handleDragEnd} >
                             <h2>Component {index} </h2>                        
-                        </PaperComponent> 
+                        </PaperComponent>  */
+                        <PaperComponent className={classes.root}  id={index}>
+                             <h2>Component {index} </h2>  
+                        </PaperComponent>
                        )
    
               })}     

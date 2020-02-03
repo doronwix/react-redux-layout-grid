@@ -11,6 +11,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import ComponentList from './components/ComponentList'
 import PageLayout from './components/PageLayout'
 
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
+
 import './App.css';
 
 //Styles
@@ -43,11 +46,13 @@ return (
         </Toolbar>
 
         {/*Inputs*/}
+        <DndProvider backend={HTML5Backend}>  
         <Grid  key={2} container spacing={2}>
             <ComponentList/>
             <PageLayout></PageLayout>
 
         </Grid>
+        </DndProvider>
 
     </Container>
 );

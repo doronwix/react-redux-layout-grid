@@ -5,6 +5,7 @@ import {makeStyles} from "@material-ui/core/styles/index";
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import LayoutConfiguration from './LayoutConfiguration'
 
 
 
@@ -36,15 +37,9 @@ export default function PageLayout() {
     return(
         <React.Fragment>
             <Grid  item xs={15} md={20} lg={25}>
-                <Paper className={classes.root}>
-                    
-
-
-                </Paper>    
-                <Paper className={classes.root}>
-   
-                </Paper>    
+                <LayoutConfiguration></LayoutConfiguration>
             </Grid>
+
         </React.Fragment>
     )
 }
