@@ -8,11 +8,13 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import ComponentList from './components/ComponentList'
-import PageLayout from './components/PageLayout'
+import ComponentList from './components/ComponentList';
+import PageLayout from './components/PageLayout';
 
-import HTML5Backend from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd'
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+
+import Root from './components/Root';
 
 import './App.css';
 
@@ -31,8 +33,8 @@ return (
     <Container maxWidth="lg">
         <CssBaseline />
 
-        {/*Title*/}
-        <Toolbar>
+      
+       {/* <Toolbar>
             <Typography
                 component="h2"
                 variant="h5"
@@ -45,17 +47,18 @@ return (
             </Typography>
         </Toolbar>
 
-        {/*Inputs*/}
+        
         <DndProvider backend={HTML5Backend}>  
         <Grid  key={2} container spacing={2}>
             <ComponentList/>
             <PageLayout></PageLayout>
 
         </Grid>
-        </DndProvider>
+        </DndProvider> */}
+       <Root></Root>
 
     </Container>
-);
+    );
 }
 
 export default App;
