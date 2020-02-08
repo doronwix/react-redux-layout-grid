@@ -12,13 +12,23 @@ const ComponentBlocks = ({classes}) =>{
 
     const addcomponent = text => dispatch(addComponent(text))
     const removecomponent = id => dispatch(removeComponent(id))
+
+    const onDragStart = (ev) =>{
+        ev.dataTransfer.dropEffect = "copy";
+        // Add the target element's id to the data transfer object
+        ev.dataTransfer.setData("text/html", ev.target.outerHTML);
+    }
     return(
+        <React.Fragment>
         <Paper    onClick={() =>
             addcomponent("added")
           } className = {classes}>
-                Left
+                <h1>component</h1>
         </Paper>
-        
+        <Paper className = {classes} draggable onDragStart={(e) => onDragStart(e)}>
+            <h1>draggble</h1>
+        </Paper>  
+        </React.Fragment>      
     )
 }
 
