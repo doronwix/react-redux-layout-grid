@@ -9,13 +9,15 @@ const ConfigurationBoard = ({classes}) =>{
     const dispatch = useDispatch();
     
     return(
-        <Paper className = {classes}>
-            {state &&
-                state.component.map(cmp => 
+        
+            state &&
+                state.component.map(cmp =>
+                <Paper className = {classes}> 
                 <h1>{cmp.id}</h1>
+                </Paper>
                 )
-            }
-        </Paper>
+            
+       
         
     )
     
