@@ -17,6 +17,7 @@ const ComponentBlocks = ({classes}) =>{
         ev.dataTransfer.dropEffect = "copy";
         // Add the target element's id to the data transfer object
         ev.dataTransfer.setData("text/html", ev.target.outerHTML);
+        
     }
     return(
         <React.Fragment>
