@@ -12,9 +12,11 @@ const ConfigurationBoard = ({classes}) =>{
     const dispatch = useDispatch();
 
     const layout = [
-        {i: '0', x: 0, y: 0, w: 1, h: 2, static: true},
-        {i: '1', x: 1, y: 0, w: 3, h: 2, minW: 2, maxW: 4},
-        {i: '2', x: 4, y: 0, w: 1, h: 2}
+        {i: '0', x: 0, y: 0, w: 1, h: 2},
+      ];
+
+      const droppingItem = [
+        {i: '0', w: 1, h: 2},
       ];
 
     
@@ -32,19 +34,20 @@ const ConfigurationBoard = ({classes}) =>{
     
     return(
         <React.Fragment>
-            <Paper id="target"  onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>
-                    drag here
-            </Paper>
-            <GridLayout className="layout" layout={layout} cols={12} rowHeight={30} width={1200}>
-            {state &&
-                state.component.map(cmp =>
-                <Paper key={cmp.id} className = {classes}> 
-                <h1>{cmp.id}</h1>
-                </Paper>
-                )
-            }
-            </GridLayout>
-            </React.Fragment>
+            <div id="target"  onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>                   
+            
+                <GridLayout className="layout" layout={layout} isDroppable={true} useCSSTransforms={false}>
+                    
+                {state &&
+                    state.component.map(cmp =>
+                    <Paper key={cmp.id} className = {classes}> 
+                        <h1>{cmp.id}</h1>
+                    </Paper>
+                    )
+                }
+                </GridLayout>
+            </div>
+        </React.Fragment>
         
     )
     

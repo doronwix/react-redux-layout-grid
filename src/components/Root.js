@@ -23,10 +23,10 @@ export default function Root(){
         <React.Fragment>
         <Header></Header>
         <Grid container item={true} sm={12}>
-            <Grid item={true} sm={6}>
+            <Grid item={true} sm={2}>
                 <ComponentBlocks className={classes.root} classes={classes.paper}/>                           
             </Grid>
-            <Grid item={true} sm={6}>
+            <Grid item={true} sm={10}>
                 <ConfigurationBoard className={classes.root} classes={classes.paper}/>                           
             </Grid>
         </Grid>

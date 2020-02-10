@@ -7,11 +7,6 @@ import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
-
-
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DndProvider } from 'react-dnd';
-
 import Root from './components/Root';
 
 import './App.css';
