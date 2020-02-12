@@ -1,9 +1,9 @@
 	// import the dependency
 import remove from 'lodash'
 
-import {ADD_COMPONENT,REMOVE_COMPONENT} from '../actions/types'
+import {ADD_COMPONENT,REMOVE_COMPONENT, SAVE_LAYOUT} from '../actions/types'
 
-function reducers(state = {component: []}, action){
+function reducers(state = {component: [], layout:[]}, action){
   switch (action.type) {
     case ADD_COMPONENT:
       return {
@@ -19,6 +19,15 @@ function reducers(state = {component: []}, action){
         return obj.id !== action.payload
       })
       return deletedNewArray
+
+      case SAVE_LAYOUT:
+        return {
+          ...state,
+          layout: [...state.layout, {
+            id: action.id,
+            html: action.html
+          }]
+        }    
 
     default:
       return state

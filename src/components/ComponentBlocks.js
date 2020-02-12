@@ -11,7 +11,7 @@ const ComponentBlocks = ({classes}) =>{
     const dispatch = useDispatch();
 
     const addcomponent = text => dispatch(addComponent(text))
-    const removecomponent = id => dispatch(removeComponent(id))
+    
 
     const onDragStart = (ev) =>{
         ev.dataTransfer.dropEffect = "copy";
