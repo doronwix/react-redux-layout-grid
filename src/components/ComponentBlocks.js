@@ -2,7 +2,10 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import Paper from "@material-ui/core/Paper";
-import {addComponent,removeComponent} from '../actions/creators'
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
+import {addComponent} from '../actions/creators'
 
 
 
@@ -21,14 +24,13 @@ const ComponentBlocks = ({classes}) =>{
     }
     return(
         <React.Fragment>
-        <Paper    onClick={() =>
-            addcomponent("added")
-          } className = {classes}>
-                <h1>component</h1>
-        </Paper>
-        <Paper className = {classes} draggable onDragStart={(e) => onDragStart(e)}>
-            <h1>draggble</h1>
-        </Paper>  
+            <Container maxWidth="sm">
+            <Typography variant="h4" component="h2">Components</Typography >  
+            <Divider variant="middle" />
+            <Paper className = {classes} draggable onDragStart={(e) => onDragStart(e)}>
+                <h1>draggble</h1>
+            </Paper>  
+        </Container>
         </React.Fragment>      
     )
 }

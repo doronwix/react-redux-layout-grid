@@ -7,6 +7,8 @@ import _ from "lodash";
 import Paper from "@material-ui/core/Paper";
 import {addComponent, saveLayout} from '../actions/creators'
 import { Responsive, WidthProvider } from "react-grid-layout";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import '../../node_modules/react-grid-layout/css/styles.css';
 
 
@@ -87,18 +89,20 @@ const ConfigurationBoard = ({classes}) =>{
     
     return(
         <React.Fragment>
+          <Container maxWidth="sm">
             {/* <div id="target"  onDrop={(e) => onDrop(e)} onDragOver={(e) => onDragOver(e)}>                    */}
-            
-                <ResponsiveReactGridLayout  id="target"  onDrop={(e) => onGridDrop(e)} onDragOver={(e) => onDragOver(e)} className="layout" isDroppable={true} useCSSTransforms={true}   measureBeforeMount={true} >
-                
-                {state &&
-                    state.component.map(cmp =>
-                    <Paper key={cmp.id} > 
-                        {cmp.id}
-                    </Paper>
-                    )
-                }
-                </ResponsiveReactGridLayout>
+                <Typography variant="h4" component="h2">Configuration</Typography >
+                  <ResponsiveReactGridLayout  id="target"  onDrop={(e) => onGridDrop(e)} onDragOver={(e) => onDragOver(e)} className="layout" isDroppable={true} useCSSTransforms={true}   measureBeforeMount={true} >
+                  
+                  {state &&
+                      state.component.map(cmp =>
+                      <Paper key={cmp.id} > 
+                          {cmp.id}
+                      </Paper>
+                      )
+                  }
+                  </ResponsiveReactGridLayout>
+                </Container>
             {/* </div> */}
         </React.Fragment>
         

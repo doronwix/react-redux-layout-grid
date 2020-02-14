@@ -9,6 +9,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Root from './components/Root';
 
+import Dashboard from './components/layout/Dashboard';
+import AddRemoveLayout from './components/testgrid';
+
 import './App.css';
 
 //Styles
@@ -26,29 +29,9 @@ return (
     <Container maxWidth="lg">
         <CssBaseline />
 
-      
-       {/* <Toolbar>
-            <Typography
-                component="h2"
-                variant="h5"
-                color="inherit"
-                align="center"
-                noWrap
-                className={classes.toolbarTitle}
-            >
-               Layout Configuration
-            </Typography>
-        </Toolbar>
-
-        
-        <DndProvider backend={HTML5Backend}>  
-        <Grid  key={2} container spacing={2}>
-            <ComponentList/>
-            <PageLayout></PageLayout>
-
-        </Grid>
-        </DndProvider> */}
-       <Root></Root>
+     
+       <Dashboard></Dashboard>
+  
 
     </Container>
     );

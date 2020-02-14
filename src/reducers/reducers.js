@@ -9,8 +9,12 @@ function reducers(state = {component: [], layout:[]}, action){
       return {
         ...state,
         component: [...state.component, {
-          id: action.id,
-          text: action.text
+          i: "d" + Math.floor(Math.random() * Math.floor(10)) + 1,
+          x: Math.floor(Math.random() * Math.floor(10)) * 2,
+          y: 0,
+          w: 2,
+          h: 2,
+          static: Math.random() < 0.05
         }]
       }
 

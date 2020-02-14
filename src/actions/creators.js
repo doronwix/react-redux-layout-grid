@@ -1,27 +1,11 @@
 // Action Creators
-import {ADD_COMPONENT,REMOVE_COMPONENT, SAVE_LAYOUT} from './types'
+import {ADD_COMPONENT, SAVE_LAYOUT} from './types'
 
-let CID = 0
-let text="";
 
-export function addComponent() {
-  return {
-    type: ADD_COMPONENT,
-    id: CID++,
-    text: text
-  }
-}
+const addComponent = payload => ({ type: ADD_COMPONENT, payload });
 
-export function removeComponent(id) {
-  return {
-    type: REMOVE_COMPONENT,
-    payload: id
-  }
-}
+const saveLayout = payload => ({ type: SAVE_LAYOUT, payload });
 
-  export function saveLayout(id) {
-    return {
-      type: SAVE_LAYOUT,
-      payload: id
-    }
-}
+
+
+export {addComponent, saveLayout}
