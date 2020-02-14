@@ -1,16 +1,22 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 //Material UI components
 import Container from '@material-ui/core/Container';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-
-import Root from './components/Root';
-
 import Dashboard from './components/layout/Dashboard';
-import AddRemoveLayout from './components/testgrid';
+
+import Layouts from './components/layout/Layouts';
+
+import {
+    BrowserRouter as Router,
+    Route,
+    Switch
+  } from "react-router-dom";
+
 
 import './App.css';
 
@@ -26,14 +32,26 @@ function App() {
 const classes = useStyles();
 
 return (
+    <Router>
     <Container maxWidth="lg">
         <CssBaseline />
+        <Switch>
+          <Route path="/Layouts">
+          <Layouts></Layouts>
+          </Route>
+          <Route path="/Dashboard">
+          <Dashboard></Dashboard>
+          </Route>
+          <Route path="/">
+           <Layouts></Layouts>
+          </Route>
+        </Switch>
+   
 
-     
-       <Dashboard></Dashboard>
-  
+    
 
     </Container>
+    </Router>
     );
 }
 

@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
-import Drawer from '@material-ui/core/Drawer';
+
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -23,17 +23,14 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
-import MainListItems from './listItems';
-import Copyright from './Copyright';
-import { Responsive, WidthProvider } from "react-grid-layout";
+import RGL, { WidthProvider } from "react-grid-layout";
+
+
 import '../../../node_modules/react-grid-layout/css/styles.css';
 
+import Copyright from './Copyright';
 import Bricks from './Bricks';
-
-
-
 
 const drawerWidth = 240;
 
@@ -121,96 +118,47 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const ResponsiveReactGridLayout = WidthProvider(Responsive);
+const ReactGridLayout = WidthProvider(RGL);
 
-export default function Dashboard() {
-  const classes = useStyles();
+export default function Layouts() {
+    const classes = useStyles();
 
-  const state = useSelector(state => state);
-  const dispatch = useDispatch();
+    const state = useSelector(state => state);
+    const dispatch = useDispatch();
 
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
-  const onGridDrop = (elm) => {
-    dispatch(addComponent(elm));
   
-}
 
-const onSaveLayout = (elm) => {
-   
-    dispatch(addComponent(elm))
-    
-
-}
-
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
-          </Typography>
-          <LinkRoute to="/Layouts">
-            <Typography component="h1" variant="h6" noWrap className={classes.link}>
-                  Layouts
-            </Typography>
-          </LinkRoute>
-
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            className={classes.button}
-            startIcon={<SaveIcon />}
-          >
-            Save
-          </Button>
-          
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        
-        <List><MainListItems></MainListItems></List>
-        <Divider />
-        
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-       
-          <ResponsiveReactGridLayout  id="target"  onDrop={(e) => onGridDrop(e)} isDroppable={true} useCSSTransforms={true} >
-  
- 
-          {state &&
+    return (
+        <div className={classes.root}>
+          <CssBaseline />
+          <AppBar position="absolute" className={clsx(classes.appBar)}>
+            <Toolbar className={classes.toolbar}>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="open drawer"
+                className={clsx(classes.menuButton)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                Layouts
+              </Typography>
+              <LinkRoute to="/Dashboard">
+                <Typography component="h1" variant="h6" noWrap className={classes.link}>
+                Dashboard
+                </Typography>
+              </LinkRoute>
+              
+            </Toolbar>
+          </AppBar>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer} />
+            <Container maxWidth="lg" className={classes.container}>
+           
+              <ReactGridLayout layout={state.component} id="target">
+      
+              {state &&
               state.component.map(
               cmp => <div key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: 2, h: 1 }}>
                 <Paper className={classes.paper}>
@@ -218,17 +166,16 @@ const onSaveLayout = (elm) => {
               </Paper>
               </div>)
             }
-  
+        
+      
+    
+              </ReactGridLayout>
 
-          </ResponsiveReactGridLayout>
-          <Grid item xs={12}>
-       
-            </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
-    </div>
-  );
+              <Box pt={4}>
+                <Copyright />
+              </Box>
+            </Container>
+          </main>
+        </div>
+      );
 }
