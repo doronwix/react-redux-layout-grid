@@ -4,7 +4,7 @@ import {
   Link as LinkRoute
 } from "react-router-dom";
 
-import {addComponent, removeComponent, saveLayout} from '../../actions/creators'
+import {addComponent, clearComponents, saveLayout} from '../../actions/creators'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -32,9 +32,6 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import '../../../node_modules/react-grid-layout/css/styles.css';
 
 import Bricks from './Bricks';
-
-
-
 
 const drawerWidth = 240;
 
@@ -158,11 +155,16 @@ export default function Dashboard() {
   
 }
 const onSaveLayout =() =>{
+
+  if (state.count === 6){
+    alert('max layout is 6');
+    return;
+  }
   if(layout_for_state && layout_for_state.length>0){
     dispatch(saveLayout(layout_for_state))
-    
+    dispatch(clearComponents())
   }
-  alert('Layout Saved');
+  alert(`Layout Saved ${state.count+1} layout`);
   
 }
 

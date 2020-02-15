@@ -109,8 +109,8 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     padding: theme.spacing(1),
-    height: '50%',
-    width:'50%'
+    height:'20px'
+
   },
   grid:{
     flex: '0 32%',

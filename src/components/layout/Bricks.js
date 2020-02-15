@@ -20,7 +20,7 @@ export default function Bricks({size}) {
   return (
     <React.Fragment>
       <div className={clsx(classes.brickContext)}>
-        <Title size={size}>Component</Title>
+        <Title size={size}>C</Title>
         <Typography component="p" variant={"h" + size}>
         Text
         </Typography>
