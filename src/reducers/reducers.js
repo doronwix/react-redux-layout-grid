@@ -3,23 +3,23 @@ import remove from 'lodash'
 
 import {ADD_COMPONENT,REMOVE_COMPONENT, SAVE_LAYOUT} from '../actions/types'
 
-function reducers(state = {component: [], layout:[]}, action){
+function reducers(state = {component: [], layouts:[]}, action){
   switch (action.type) {
     case ADD_COMPONENT:
       return {
         ...state,
         component: [...state.component, {
-          i: "d" + Math.floor(Math.random() * Math.floor(10)) + 1,
-          x: Math.floor(Math.random() * Math.floor(10)) * 2,
-          y: 0,
-          w: 2,
-          h: 2,
+          i: "d" + Math.floor(Math.random() * Math.floor(100000)) + 1,
+          x: action.payload.x,
+          y: action.payload.y,
+          w: action.payload.w,
+          h: action.payload.h,
           static: Math.random() < 0.05
         }]
       }
 
     case REMOVE_COMPONENT:
-      const deletedNewArray = remove(state, obj => {
+      const deletedNewArray = remove(state.component, obj => {
         return obj.id !== action.payload
       })
       return deletedNewArray
@@ -27,10 +27,7 @@ function reducers(state = {component: [], layout:[]}, action){
       case SAVE_LAYOUT:
         return {
           ...state,
-          layout: [...state.layout, {
-            id: action.id,
-            html: action.html
-          }]
+          layouts: [...state.layouts, {...action.payload}]
         }    
 
     default:

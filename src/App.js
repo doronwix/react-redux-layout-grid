@@ -1,14 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 
-
-//Material UI components
 import Container from '@material-ui/core/Container';
-
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import Dashboard from './components/layout/Dashboard';
-
 import Layouts from './components/layout/Layouts';
 
 import {
@@ -18,18 +12,9 @@ import {
   } from "react-router-dom";
 
 
-import './App.css';
-
-//Styles
-const useStyles = makeStyles({
-  toolbarTitle: {
-      flex: 1,
-  },
-});
 
 function App() {
 
-const classes = useStyles();
 
 return (
     <Router>
@@ -43,13 +28,9 @@ return (
           <Dashboard></Dashboard>
           </Route>
           <Route path="/">
-           <Layouts></Layouts>
+           <Dashboard></Dashboard>
           </Route>
         </Switch>
-   
-
-    
-
     </Container>
     </Router>
     );

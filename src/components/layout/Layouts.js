@@ -4,20 +4,17 @@ import {
   Link as LinkRoute
 } from "react-router-dom";
 
-import {addComponent, saveLayout} from '../../actions/creators'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Button from '@material-ui/core/Button';
+import _ from 'lodash'
 
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import SaveIcon from '@material-ui/icons/Save';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -106,16 +103,23 @@ const useStyles = makeStyles(theme => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
   },
   paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
+    padding: theme.spacing(1),
+    height: '50%',
+    width:'50%'
   },
-  fixedHeight: {
-    height: 240,
-  },
+  grid:{
+    flex: '0 32%',
+    height: '250px',
+    marginBottom: '2%', /* (100-32*3)/2 */
+
+    borderStyle: "solid",
+    borderWidth: "1px",
+  }
 }));
 
 const ReactGridLayout = WidthProvider(RGL);
@@ -124,7 +128,15 @@ export default function Layouts() {
     const classes = useStyles();
 
     const state = useSelector(state => state);
-    const dispatch = useDispatch();
+    
+    const flexGrid = ()=>{
+      let children =[];
+      for(let i=0;i<6-state.layouts.length;i++){
+        children.push(<div className={classes.grid}></div>);
+      }
+      
+      return children;
+    }
 
   
 
@@ -155,25 +167,27 @@ export default function Layouts() {
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
             <Container maxWidth="lg" className={classes.container}>
-           
-              <ReactGridLayout layout={state.component} id="target">
-      
-              {state &&
-              state.component.map(
-              cmp => <div key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: 2, h: 1 }}>
-                <Paper className={classes.paper}>
-                 <Bricks />
-              </Paper>
-              </div>)
-            }
-        
-      
-    
-              </ReactGridLayout>
+            {state &&
+              state.layouts.map(
+              lt => 
+              <div className={classes.grid}> 
+                   
+              <ReactGridLayout id="target" isDraggable= {false}>        
+              {_.map(lt, 
+                cmp =>                
+                <Paper className={classes.paper} key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: cmp.w, h: cmp.h, static:true}}>
+                  <Bricks size={10}/>
+                </Paper>
+             )}
 
-              <Box pt={4}>
-                <Copyright />
-              </Box>
+              </ReactGridLayout>
+              
+              </div>)
+              
+              }
+              {flexGrid()}
+              
+
             </Container>
           </main>
         </div>

@@ -4,7 +4,7 @@ import {
   Link as LinkRoute
 } from "react-router-dom";
 
-import {addComponent, saveLayout} from '../../actions/creators'
+import {addComponent, removeComponent, saveLayout} from '../../actions/creators'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,11 +19,12 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SaveIcon from '@material-ui/icons/Save';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+
 
 import MainListItems from './listItems';
 import Copyright from './Copyright';
@@ -103,31 +104,45 @@ const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    height: '100vh',
+    
     overflow: 'auto',
   },
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
+    
   },
   paper: {
     padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
+    
+
   },
-  fixedHeight: {
-    height: 240,
-  },
+  grid:{
+    height: '40em',
+    borderStyle: "solid",
+    borderWidth: "1px",
+  }
 }));
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 export default function Dashboard() {
+  let layout_for_state = [];
+
   const classes = useStyles();
 
   const state = useSelector(state => state);
   const dispatch = useDispatch();
+
+  const grid_config = {
+    layouts: state.layout,
+    className: classes.gridLayout,
+    onDrop: (e) => onGridDrop(e),
+    onLayoutChange: (layout, layouts) =>
+    onLayoutChange(layout, layouts),
+    isDroppable:true,
+    useCSSTransforms:true
+  }
 
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -136,19 +151,26 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  
 
   const onGridDrop = (elm) => {
     dispatch(addComponent(elm));
   
 }
-
-const onSaveLayout = (elm) => {
-   
-    dispatch(addComponent(elm))
+const onSaveLayout =() =>{
+  if(layout_for_state && layout_for_state.length>0){
+    dispatch(saveLayout(layout_for_state))
     
+  }
+  alert('Layout Saved');
+  
+}
+
+const onLayoutChange = (layout, layouts) => {
+    layout_for_state = layout;
 
 }
+
 
   return (
     <div className={classes.root}>
@@ -179,6 +201,7 @@ const onSaveLayout = (elm) => {
             size="small"
             className={classes.button}
             startIcon={<SaveIcon />}
+            onClick={onSaveLayout}
           >
             Save
           </Button>
@@ -206,25 +229,24 @@ const onSaveLayout = (elm) => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-       
-          <ResponsiveReactGridLayout  id="target"  onDrop={(e) => onGridDrop(e)} isDroppable={true} useCSSTransforms={true} >
-  
+       <Box className={classes.grid}>
+          <ResponsiveReactGridLayout  id="target" {...grid_config} >
+         
  
           {state &&
               state.component.map(
-              cmp => <div key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: 2, h: 1 }}>
-                <Paper className={classes.paper}>
-                 <Bricks />
+              cmp => 
+                <Paper className={classes.paper} key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: 2, h: 1 }}>
+                 <Bricks size={4} />
               </Paper>
-              </div>)
+             )
             }
   
 
           </ResponsiveReactGridLayout>
-          <Grid item xs={12}>
-       
-            </Grid>
-          <Box pt={4}>
+          </Box>
+
+          <Box pt={4} className="Copyright">
             <Copyright />
           </Box>
         </Container>
