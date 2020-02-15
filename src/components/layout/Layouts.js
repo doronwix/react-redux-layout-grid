@@ -108,13 +108,12 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'space-between'
   },
   paper: {
-    padding: theme.spacing(1),
-    height:'20px'
+    
 
   },
   grid:{
     flex: '0 32%',
-    height: '250px',
+    height: '20em',
     marginBottom: '2%', /* (100-32*3)/2 */
 
     borderStyle: "solid",
@@ -172,11 +171,11 @@ export default function Layouts() {
               lt => 
               <div className={classes.grid}> 
                    
-              <ReactGridLayout id="target" isDraggable= {false}>        
+              <ReactGridLayout id="target" isDraggable= {false}  layouts={lt} verticalCompact={true} rowHeight={75} cols={12}>        
               {_.map(lt, 
                 cmp =>                
-                <Paper className={classes.paper} key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: cmp.w, h: cmp.h, static:true}}>
-                  <Bricks size={10}/>
+                <Paper  key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: cmp.w, h: cmp.h, static:true}}>
+                  Comp
                 </Paper>
              )}
 

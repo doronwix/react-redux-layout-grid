@@ -34,7 +34,7 @@ const classes = useStyles();
 const onDragStart = (ev) =>{
   ev.dataTransfer.dropEffect = "copy";
   // Add the target element's id to the data transfer object
-  ev.dataTransfer.setData("text/html", ev.target.outerHTML);
+  ev.dataTransfer.setData('text/plain', '');
   
 }
 return(

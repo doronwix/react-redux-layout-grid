@@ -138,7 +138,8 @@ export default function Dashboard() {
     onLayoutChange: (layout, layouts) =>
     onLayoutChange(layout, layouts),
     isDroppable:true,
-    useCSSTransforms:true
+    useCSSTransforms:true,
+    containerPadding:5
   }
 
   const [open, setOpen] = React.useState(true);
