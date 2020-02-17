@@ -1,7 +1,7 @@
 	// import the dependency
-import remove from 'lodash'
+import _ from 'lodash'
 
-import {ADD_COMPONENT,CLEAR_COMPONENTS, SAVE_LAYOUT} from '../actions/types'
+import {ADD_COMPONENT,REMOVE_COMPONENT, CLEAR_COMPONENTS, SAVE_LAYOUT} from '../actions/types'
 
 function reducers(state = {component: [], layouts:[], count:0}, action){
   switch (action.type) {
@@ -17,6 +17,10 @@ function reducers(state = {component: [], layouts:[], count:0}, action){
           static: Math.random() < 0.05
         }]
       }
+      case REMOVE_COMPONENT:
+        return {...state,
+        component:  state.component.filter( item=> item.i !== action.payload  )
+        }
 
     case CLEAR_COMPONENTS:
       return{

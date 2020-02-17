@@ -4,7 +4,7 @@ import {
   Link as LinkRoute
 } from "react-router-dom";
 
-import {addComponent, clearComponents, saveLayout} from '../../actions/creators'
+import {addComponent, removeComponent, clearComponents, saveLayout} from '../../actions/creators'
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -149,8 +149,6 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
-
   const onGridDrop = (elm) => {
     dispatch(addComponent(elm));
   
@@ -171,7 +169,10 @@ const onSaveLayout =() =>{
 
 const onLayoutChange = (layout, layouts) => {
     layout_for_state = layout;
+}
 
+const onComponentRemove = (elm) => {
+  dispatch(removeComponent(elm));
 }
 
 
@@ -233,17 +234,18 @@ const onLayoutChange = (layout, layouts) => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
        <Box className={classes.grid}>
-          <ResponsiveReactGridLayout  id="target" {...grid_config} >
+          <ResponsiveReactGridLayout  id="target" {...grid_config} width={100}>
          
  
-          {state &&
+          {state &&           
               state.component.map(
               cmp => 
                 <Paper className={classes.paper} key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: 2, h: 1 }}>
-                 <Bricks size={4} />
+                 <Bricks size={4} removeAction={onComponentRemove.bind(null, cmp.i)} />
               </Paper>
              )
             }
+          
   
 
           </ResponsiveReactGridLayout>

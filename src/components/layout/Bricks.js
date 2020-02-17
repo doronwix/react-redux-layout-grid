@@ -13,14 +13,28 @@ const useStyles = makeStyles({
   brickContext: {
 
   },
+  removeStyle: {
+    position: "absolute",
+    right: "2px",
+    top: 0,
+    cursor: "pointer"
+  }
 });
 
-export default function Bricks({size}) {
+export default function Bricks({size, removeAction}) {
   const classes = useStyles();
   return (
     <React.Fragment>
       <div className={clsx(classes.brickContext)}>
         <Title size={size}>C</Title>
+        <div>
+          <span
+            className={classes.removeStyle}
+            onClick ={removeAction}                      
+          >
+            x
+          </span>
+        </div>
         <Typography component="p" variant={"h" + size}>
         Text
         </Typography>
@@ -30,6 +44,7 @@ export default function Bricks({size}) {
             Other Text
           </Link>
         </div>
+
       </div>
     </React.Fragment>
   );
