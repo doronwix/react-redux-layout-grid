@@ -161,6 +161,7 @@ const onSaveLayout =() =>{
     alert('max layout is 6');
     return;
   }
+  layout_for_state.shift();
   if(layout_for_state && layout_for_state.length>0){
     dispatch(saveLayout(layout_for_state))
     dispatch(clearComponents())
@@ -170,6 +171,7 @@ const onSaveLayout =() =>{
 }
 
 const onLayoutChange = (layout, layouts) => {
+    
     layout_for_state = layout;
 }
 
@@ -237,7 +239,7 @@ const onComponentRemove = (elm) => {
         <Container maxWidth="lg" className={classes.container}>
        <Box className={classes.grid}>
           <ResponsiveReactGridLayout  id="target" {...grid_config} >
-         <div>drag here</div>
+        
  
           {state &&         
               state.component.map(
@@ -249,7 +251,7 @@ const onComponentRemove = (elm) => {
             }
           
   
-
+          <div>drag here</div>
           </ResponsiveReactGridLayout>
           </Box>
 
