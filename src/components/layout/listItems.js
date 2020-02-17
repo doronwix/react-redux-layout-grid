@@ -39,11 +39,10 @@ const onDragStart = (ev) =>{
 }
 return(
   <div>
-    <ListSubheader inset>Componenets</ListSubheader>
+    <ListSubheader inset>Components</ListSubheader>
     {list_of_components.map(c => (
     <ListItem >
       <Paper key={c.id} primary={c.name} square="false" className={classes.componentContext} draggable onDragStart={(e) => onDragStart(e)}> {c.name}</Paper>
-      
     </ListItem>
     ))}
   </div>

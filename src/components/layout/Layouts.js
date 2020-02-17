@@ -168,7 +168,7 @@ export default function Layouts() {
               lt => 
               <div className={classes.grid}> 
                    
-              <ReactGridLayout id="target" isDraggable= {false}  layouts={lt} verticalCompact={true} rowHeight={75} cols={12}>        
+              <ReactGridLayout id="target" isDraggable= {false}  layouts={lt} verticalCompact={true} rowHeight={75} cols={6}>        
               {_.map(lt, 
                 cmp =>                
                 <Paper  key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: cmp.w, h: cmp.h, static:true}}>
