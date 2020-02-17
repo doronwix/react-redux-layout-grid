@@ -113,7 +113,7 @@ const useStyles = makeStyles(theme => ({
   grid:{
     flex: '0 32%',
     height: '20em',
-    marginBottom: '2%', /* (100-32*3)/2 */
+    marginBottom: '1%', 
 
     borderStyle: "solid",
     borderWidth: "1px",

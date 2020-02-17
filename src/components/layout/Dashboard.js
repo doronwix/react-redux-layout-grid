@@ -131,6 +131,8 @@ export default function Dashboard() {
   const state = useSelector(state => state);
   const dispatch = useDispatch();
 
+  
+
   const grid_config = {
     layouts: state.layout,
     className: classes.gridLayout,
@@ -234,10 +236,10 @@ const onComponentRemove = (elm) => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
        <Box className={classes.grid}>
-          <ResponsiveReactGridLayout  id="target" {...grid_config} width={100}>
-         
+          <ResponsiveReactGridLayout  id="target" {...grid_config} >
+         <div>drag here</div>
  
-          {state &&           
+          {state &&         
               state.component.map(
               cmp => 
                 <Paper className={classes.paper} key={cmp.i} data-grid={{ x: cmp.x, y: cmp.y, w: 2, h: 1 }}>
