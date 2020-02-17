@@ -141,7 +141,7 @@ export default function Dashboard() {
     onLayoutChange(layout, layouts),
     isDroppable:true,
     useCSSTransforms:true,
-    containerPadding:5
+    containerPadding:[5,5]
   }
 
   const [open, setOpen] = React.useState(true);
@@ -239,7 +239,7 @@ const onComponentRemove = (elm) => {
         <Container maxWidth="lg" className={classes.container}>
        <Box className={classes.grid}>
           <ResponsiveReactGridLayout  id="target" {...grid_config} >
-        
+          <div>drag here</div>
  
           {state &&         
               state.component.map(
@@ -251,7 +251,7 @@ const onComponentRemove = (elm) => {
             }
           
   
-          <div>drag here</div>
+         
           </ResponsiveReactGridLayout>
           </Box>
 
